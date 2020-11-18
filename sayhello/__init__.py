@@ -13,12 +13,13 @@ db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
+
 @login_manager.user_loader
 def load_user(user_id):  # 创建用户加载回调函数,接受用户 ID 作为参数
-    from moveeblog.models import User
+    from sayhello.models import User
     user = User.query.get(int(user_id))  # 用 ID 作为 User 模型的主键查询对应的用户
     return user
 # 返回用户对象
 
 
-from moveeblog import views, errors, commands
+from sayhello import views, errors, commands

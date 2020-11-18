@@ -1,7 +1,7 @@
 import click
 
-from moveeblog import app, db
-from moveeblog.models import Message, User
+from sayhello import app, db
+from sayhello.models import Message, User
 
 
 @app.cli.command()

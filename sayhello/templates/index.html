@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .btn {
+    font-size: 12px;
+    padding: 3px 5px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 1px solid #555555;
+    border-radius: 5px;
+}
+
+.float-right {
+    float: right;
+}
+
+.inline-form {
+    display: inline;
+}
+
+</style>
+
+{% if current_user.is_authenticated %}
+    <form method="post">
+        Name<br><input type="text" name="name" autocomplete="off"><br>
+        Message<br><textarea name="body" cols="50" rows="10" ></textarea>
+        <br>
+        <input class="btn" type="submit" name="submit" value="Add">
+    </form>
+<br><br>
+{% endif %}
+    <h5>{{ messages|length }} messages
+        <small class="float-right">
+            <a href="#bottom" title="Go Bottom">&darr;</a>
+        </small>
+    </h5>
+    <div class="list-group">
+        {% for message in messages %}
+            <a class="list-group-item list-group-item-action flex-column">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 text-success">{{ message.name }}<br>
+                        <span class="float-right">
+                            {% if current_user.is_authenticated %}
+<!--                            <form class="inline-form" method="post" action="{{ url_for('edit', message_id=message.id) }}">-->
+<!--                                <input class="btn" type="submit" name="edit" value="edit" onclick="return confirm('Are you sure?')">-->
+<!--                            </form>-->
+                            <form class="inline-form" method="post" action="{{ url_for('delete', message_id=message.id) }}">
+                                <input class="btn" type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure?')">
+                            </form>
+                            {% endif %}
+                        </span>
+                        <small class="text-muted"> #{{ loop.revindex }}</small>
+                    </h5>
+                    <small data-toggle="tooltip" data-placement="top"
+                           data-timestamp="{{ message.timestamp.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
+                           data-delay="500">
+                        {{ moment(message.timestamp).fromNow(refresh=True) }}
+                    </small>
+                </div>
+                <p class="mb-1">{{ message.body }}</p>
+            </a>
+        {% if current_user.is_authenticated %}
+            <a class="btn" href="{{ url_for('edit', message_id=message.id) }}">Edit</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

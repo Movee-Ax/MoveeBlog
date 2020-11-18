@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    #grad {
+    background-image: linear-gradient(#0b6dff, #EE7AE9);
+    background-repeat: no-repeat;
+	background-size: cover;
+	height: 1000px;
+}
+</style>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Say Hello!{% endblock %}</title>
+    <title>{% block title %}Movee's Blog{% endblock %}</title>
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 </head>
-<body>
+<body id="grad" marginheight="">
 <main class="container">
     <header>
         <h1 class="text-center display-4">
-            <a href="{{ url_for('index') }}" class="text-success"><strong>Welcome to</strong></a>
-            <small class="text-muted sub-title">Movee's Blog</small>
+            <a href="{{ url_for('index') }}" class="text-success"><strong><font color="#FF34B3">Welcome to</font></strong></a>
+            <small class="text-muted sub-title"><font color="#FF83FA">Movee's Blog</font></small>
         </h1>
         <div>
             <small class="text-muted sub-title">
                 <ul>
             {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('settings') }}">Settings</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('settings') }}"><font color="white">Settings</font></a></li>
+                <li><a href="{{ url_for('logout') }}"><font color="white">Logout</font></a></li>
             {% else %}
-                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('login') }}"><font color="white">Login</font></a></li>
             {% endif %}
                 </ul>
             </small>
@@ -52,3 +60,4 @@
 {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
 </body>
 </html>
+

@@ -1,6 +1,6 @@
 from flask import render_template
 
-from moveeblog import app
+from sayhello import app
 
 
 @app.errorhandler(404)

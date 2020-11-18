@@ -1,7 +1,8 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from moveeblog import db
+from sayhello import db
 from flask_login import UserMixin
+
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
